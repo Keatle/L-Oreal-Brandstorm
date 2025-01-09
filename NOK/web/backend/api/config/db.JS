@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config(); // Correct usage of dotenv
 
 const pool = mysql.createPool({
     host: '127.0.0.1', // Use '127.0.0.1' instead of 'localhost' for compatibility

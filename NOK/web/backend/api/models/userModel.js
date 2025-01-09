@@ -3,8 +3,13 @@ const db = require('../config/db'); // Database connection
 class UserModel {
 
     static async findByEmail(email) {
-        const [rows] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
-        return rows[0];
+        try {
+            const [rows] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
+            return rows[0];
+        } catch (error) {
+            console.error('Error finding user by email:', error);
+            throw new Error('Error finding user by email');
+        }
     }
 
     static async create(userData) {
@@ -15,8 +20,13 @@ class UserModel {
             VALUES (?, ?, ?, ?, ?, ?, ?)
         `;
         const values = [first_name, last_name, email, password, phone_number, date_of_birth, gender];
-        const [result] = await db.query(sql, values);
-        return result.insertId;
+        try {
+            const [result] = await db.query(sql, values);
+            return result.insertId;
+        } catch (error) {
+            console.error('Error creating user:', error);
+            throw new Error('Error creating user');
+        }
     }
     
 }
