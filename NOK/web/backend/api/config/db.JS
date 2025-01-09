@@ -1,0 +1,15 @@
+const mysql = require('mysql2/promise');
+require('dotenv').config(); // Load environment variables from .env file
+
+const pool = mysql.createPool({
+    host: '127.0.0.1', // Use '127.0.0.1' instead of 'localhost' for compatibility
+    user: 'root',     // Default MySQL username
+    password:'', // Your MySQL password
+    database:'NOK', // Default database name
+    port: 3306,       // Default MySQL port
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+
+module.exports = pool;

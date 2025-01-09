@@ -1,17 +1,23 @@
 const express = require('express');
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
+//const dotenv = require('dotenv');
+const userRoutes = require('./routes/userRoutes');
+
+//dotenv.config(); // Load environment variables from .env
 
 const app = express();
 
-//Middelware 
-app.use(bodyParser.json());
+// Middleware
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-//Basic Route 
-app.get('/', (req, res) =>{
+// Routes
+app.use('/api/users', userRoutes);
 
-    res.send('Welcome to my api ! ');
+// Start the server
+const PORT = 5000 ; //process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-//Start the server 
