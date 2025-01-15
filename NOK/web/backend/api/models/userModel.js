@@ -1,4 +1,4 @@
-const db = require('../config/db'); // Database connection
+const db = require('../config/db'); 
 
 class UserModel {
 

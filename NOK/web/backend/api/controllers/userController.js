@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/UserModel');
 const SECRET_KEY = process.env.SECRET_KEY || '1028uue7w2398' ;
+const blacklist = new Set() ;
 
 class UserController {
     static async register(req, res) {
@@ -57,6 +58,7 @@ class UserController {
              SECRET_KEY,
            { expiresIn: '1h' }
           );
+
             res.status(200).json({ message: 'Login successful', token });
 
         } catch (error) {
@@ -65,6 +67,20 @@ class UserController {
             
         }
     }
+
+    static async logout(req , res){
+
+        const token = req.headers['authorization']?.split(' ')[1];
+
+        if(!token){
+            return res.status(400).json({message: 'Token is required for logout'});
+        }
+
+        // add token to the blacklist 
+        blacklist.add(token);
+        res.status(200).json({ message: 'Logout Successful'});
+
+    };
 }
 
 module.exports = UserController;
