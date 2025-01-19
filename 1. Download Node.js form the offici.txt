@@ -1,0 +1,52 @@
+1. Download Node.js form the official website and install it.
+	- after that use VS Code to create a folder for your backend.
+
+2. Download these extensions as they make your coding easier:
+	- ESLint: Helps catch JavaScript errors and enforce coding standards.
+	- Prettier - Code Formatter: Automatically formats your code to look clean.
+	- nNode.js Essentials: Provides Node.js snippets and debugging tools.
+	- REST Client (optional): Allows you to test your API endpoints directly within 	  VS Code.
+	- Path Intellisense: Helps autocomplete file paths while coding.
+	  Search for "Path Intellisense" in the extensions marketplace.
+	- Code Runner: Lets you quickly run your Node.js files directly from VS Code.
+	  Search for "Code Runner" in the marketplace and install it.
+	- Debugger for Node.js: Provides debugging tools for Node.js apps.
+	  Built into VS Code, but you can search "Node.js Debugger" if it's missing.
+	- npm Intellisense: Autocompletes require statements for npm packages.
+	  Search for "npm Intellisense" and install it.
+
+3. Close VS  Code and install express.js by
+	- Opening cmd and runing these commands:
+	- cd "C:\Users\nqobi\My_Files\School\Projects\L'Oreal BrandStorm 2025\nok-loreal-backend"
+	- npm install express
+	- This will be the response you get: 
+	added 69 packages in 5s
+
+	14 packages are looking for funding
+  	run npm fund for details
+
+4. Then write your test code to see if the API is running:
+	- Create a file called 'index.js' and write this code:
+
+// Import the Express module
+const express = require('express');
+const app = express();
+const PORT = 5000;
+
+// Middleware to parse JSON requests
+app.use(express.json());
+
+// Test route
+app.get('/', (req, res) => {
+    res.send('API is working!');
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+5. Run your code by opening terminal and running 'node index.js'
+	- This should be the response you get: 'Server is running on http://localhost:5000'
+	- Open your browser and run http://localhost:5000, you should see a page with the words 'Your API is workingh'
+	- Done your test API is working. You can now get started.
