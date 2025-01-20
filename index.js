@@ -1,6 +1,6 @@
 const express = require('express');
 const pool = require('./db'); // Import the database connection
-
+const loginRouter = require('./login'); // Import login route
 const app = express();
 //const PORT = 5000;
 //const PORT = 5001; // Change to a different port
@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5000; // Use the PORT environment variable if a
 
 // Middleware to parse JSON requests
 app.use(express.json());
+app.use('/login', loginRouter); // Mount login route
 
 // Test route to fetch all users
 app.get('/users', async (req, res) => {
@@ -92,7 +93,7 @@ const { body, validationResult } = require('express-validator'); // Import valid
 ); */
 
 const bcrypt = require('bcrypt'); // Import bcrypt
-
+// Route to create/register a user profile
 app.post(
     '/users',
     [
