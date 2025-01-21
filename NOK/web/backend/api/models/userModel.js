@@ -14,14 +14,14 @@ class UserModel {
 
     static async create(userData) {
         const { first_name, last_name, email, password, phone_number, date_of_birth, gender } = userData;
-        const sql = `
+        const register = `
             INSERT INTO user 
             (first_name, last_name, email, password, phone_number, date_of_birth, gender) 
             VALUES (?, ?, ?, ?, ?, ?, ?)
         `;
-        const values = [first_name, last_name, email, password, phone_number, date_of_birth, gender];
+        const details = [first_name, last_name, email, password, phone_number, date_of_birth, gender];
         try {
-            const [result] = await db.query(sql, values);
+            const [result] = await db.query(register, details);
             return result.insertId;
         } catch (error) {
             console.error('Error creating user:', error);
