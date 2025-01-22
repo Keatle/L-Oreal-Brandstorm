@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const UserModel = require('../models/UserModel');
+const UserModel = requie('../models/userModel.js');
 const SECRET_KEY = process.env.SECRET_KEY || '1028uue7w2398' ;
 const blacklist = new Set() ;
 
@@ -18,6 +18,8 @@ class UserController {
             // Hash the password
             const hashedPassword = await bcrypt.hash(password, 10);
 
+            // send user a verification code to email 
+        
             // Create a new user
             const userId = await UserModel.create({
                 first_name,
@@ -34,6 +36,10 @@ class UserController {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
+    }
+
+    static async isValid(req, res){
+        
     }
 
     static async login(req, res) {

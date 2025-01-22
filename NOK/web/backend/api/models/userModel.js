@@ -1,4 +1,6 @@
 const db = require('../config/db'); 
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 class UserModel {
 
@@ -10,6 +12,11 @@ class UserModel {
             console.error('Error finding user by email:', error);
             throw new Error('Error finding user by email');
         }
+    }
+
+    static async sendCode(email){
+        const code = 'wkkoeoeo'
+
     }
 
     static async create(userData) {
