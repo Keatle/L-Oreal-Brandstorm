@@ -62,8 +62,9 @@ class UserController {
         const code = req.body.code ;
 
         try{
-            // send email verification code 
+            // verify the email verification code 
             const isValid = await UserModel.verifyCode(code);
+
             if(isValid){
                 res.status(200).json({ message : 'Code verified successfully !;'});
             }
@@ -72,7 +73,7 @@ class UserController {
             }
         }
         catch(error) {
-            console.error(error);
+            console.error('Problem validating code',error);
             res.status(500).json({ message : 'Internal API error'});
         }
         

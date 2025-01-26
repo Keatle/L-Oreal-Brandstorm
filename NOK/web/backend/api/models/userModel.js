@@ -60,23 +60,16 @@ class UserModel {
 
     }
 
-    static async verifyCode(code){
-
-        const [rows] = await db.query('SELECT email FROM email_verification WHERE code = ? AND expiration > NOW()', [code])
-
+    static async verifyCode(code)   {
         try{
+            const [rows] = await db.query('SELECT email FROM email_verification WHERE code = ? AND expiration > NOW()'
+                , [code])
             //check if matching record exists
-                if(rows.length > 0){
-                    return true ;
-                }
-                else{
-                    return false ;
-                }
+               return rows.length > 0; 
         }
         catch(error){
                 console.error('Error Verifying code', error);
                 throw new Error('Database query failed');
-                return false ;
         }
     }
 
