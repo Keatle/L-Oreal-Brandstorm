@@ -38,7 +38,43 @@ class UserController {
         }
     }
 
-    static async isValid(req, res){
+    static async sendCode(req, res) {
+        const {email} = req.body ;
+
+        try{
+            // send email verification code 
+            const sent = await UserModel.sendCode(email);
+
+            if(sent){
+                res.status(200).json({ message : 'Verification email sent successfully!'});
+            }
+            else{
+                res.status(404).json({ message : 'Email entered is incorrect !'});
+            }
+        }
+        catch(error) {
+            console.error('Error sending verification email:', error);
+            return res.status(500).json({ message : 'Internal API error'});
+        }
+    }
+
+    static async isValid(req, res) {
+        const code = req.body.code ;
+
+        try{
+            // send email verification code 
+            const isValid = await UserModel.verifyCode(code);
+            if(isValid){
+                res.status(200).json({ message : 'Code verified successfully !;'});
+            }
+            else{
+                res.status(404).json({ message : 'Invalid or expired code'});
+            }
+        }
+        catch(error) {
+            console.error(error);
+            res.status(500).json({ message : 'Internal API error'});
+        }
         
     }
 
@@ -46,6 +82,7 @@ class UserController {
         const { email, password } = req.body;
 
         try {
+
             // Find the user by email
             const user = await UserModel.findByEmail(email);
             if (!user) {

@@ -1,4 +1,3 @@
--- Creating the 'user' table
 CREATE TABLE user (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50),
@@ -12,7 +11,6 @@ CREATE TABLE user (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Creating the 'payment' table
 CREATE TABLE payment (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
@@ -22,7 +20,6 @@ CREATE TABLE payment (
     FOREIGN KEY (order_id) REFERENCES `order`(order_id)
 );
 
--- Creating the 'order' table
 CREATE TABLE `order` (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -32,7 +29,6 @@ CREATE TABLE `order` (
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
--- Creating the 'product' table
 CREATE TABLE product (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(50),
@@ -45,7 +41,6 @@ CREATE TABLE product (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Creating the 'article' table
 CREATE TABLE article (
     article_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -56,7 +51,6 @@ CREATE TABLE article (
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
--- Creating the 'ai_analysis' table
 CREATE TABLE ai_analysis (
     analysis_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -67,7 +61,6 @@ CREATE TABLE ai_analysis (
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
--- Creating the 'cart' table
 CREATE TABLE cart (
     cart_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -75,7 +68,6 @@ CREATE TABLE cart (
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
--- Creating the 'cart_item' table
 CREATE TABLE cart_item (
     cart_item_id INT AUTO_INCREMENT PRIMARY KEY,
     cart_id INT NOT NULL,
@@ -83,4 +75,10 @@ CREATE TABLE cart_item (
     quantity INT,
     FOREIGN KEY (cart_id) REFERENCES cart(cart_id),
     FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
+CREATE TABLE email_verification (
+    email VARCHAR(255) PRIMARY KEY,
+    code VARCHAR(6),
+    expiration DATETIME 
 );
