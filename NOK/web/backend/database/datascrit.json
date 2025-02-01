@@ -1,0 +1,23 @@
+{
+    "user":
+    [{
+        "first_name": "Daniel",
+        "last_name": "Dion",
+        "email": "daniel.dion@example.com",
+        "password": "password123",
+        "phone_number": "123-456-7890",
+        "date_of_birth": "1990-05-15",
+        "gender": "Male"
+    },
+    {
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john.doe@example.com",
+        "password": "password123",
+        "phone_number": "123-456-7890",
+        "date_of_birth": "1990-05-15",
+        "gender": "Male"
+    }
+
+    ]
+}

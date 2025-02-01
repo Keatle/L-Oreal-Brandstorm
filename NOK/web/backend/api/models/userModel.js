@@ -63,7 +63,8 @@ class UserModel {
     static async verifyCode(code)   {
         try{
             const [rows] = await db.query('SELECT email FROM email_verification WHERE code = ? AND expiration > NOW()'
-                , [code])
+                , [code]) ;
+                
             //check if matching record exists
                return rows.length > 0; 
         }
@@ -79,10 +80,10 @@ class UserModel {
         const register = `
             INSERT INTO user 
             (first_name, last_name, email, password, phone_number, date_of_birth, gender) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)`
-            ;
+            VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
         const details = [first_name, last_name, email, password, phone_number, date_of_birth, gender];
+        
         try {
             const [result] = await db.query(register, details);
             return result.insertId;

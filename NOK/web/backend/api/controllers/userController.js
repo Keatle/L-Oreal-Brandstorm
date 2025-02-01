@@ -1,10 +1,13 @@
 const bcrypt = require('bcrypt');
+
 const jwt = require('jsonwebtoken');
-const UserModel = requie('../models/userModel.js');
+
+const UserModel = require('../models/userModel.js');
 const SECRET_KEY = process.env.SECRET_KEY || '1028uue7w2398' ;
 const blacklist = new Set() ;
 
 class UserController {
+
     static async register(req, res) {
         const { first_name, last_name, email, password, phone_number, date_of_birth, gender } = req.body;
 
@@ -76,7 +79,6 @@ class UserController {
             console.error('Problem validating code',error);
             res.status(500).json({ message : 'Internal API error'});
         }
-        
     }
 
     static async login(req, res) {
@@ -92,6 +94,7 @@ class UserController {
 
             // Compare the password
             const isPasswordValid = await bcrypt.compare(password, user.password);
+
             if (!isPasswordValid) {
                 return res.status(401).json({ message: 'Invalid password' });
             }
@@ -120,10 +123,19 @@ class UserController {
             return res.status(400).json({message: 'Token is required for logout'});
         }
 
-        // add token to the blacklist 
-        blacklist.add(token);
-        res.status(200).json({ message: 'Logout Successful'});
+        try{
+            //add token to the in-memory blacklist
+            blacklist.add(token);
 
+            //Optionallly log the logout action
+            console.log('Token blacklisted: ${token}');
+
+            res.status(200).json({ message: 'Logout successful'});
+
+        }catch(error){
+            console.error('Error during logout:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
     };
 }
 
