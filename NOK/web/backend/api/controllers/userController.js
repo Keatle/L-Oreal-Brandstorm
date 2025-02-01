@@ -115,7 +115,7 @@ class UserController {
         }
     }
 
-    static async logout(req , res){
+     /**  static async logout(req , res){
 
         const token = req.headers['authorization']?.split(' ')[1];
 
@@ -136,7 +136,7 @@ class UserController {
             console.error('Error during logout:', error);
             res.status(500).json({ message: 'Internal server error' });
         }
-    };
+    }; */ 
 }
 
 module.exports = UserController;
