@@ -17,7 +17,15 @@
         "phone_number": "123-456-7890",
         "date_of_birth": "1990-05-15",
         "gender": "Male"
+    },
+    {
+        "first_name": "Merriam",
+        "last_name": "Matheba",
+        "email": "merriam.matheba@example.com",
+        "password": "password123",
+        "phone_number": "123-456-7890",
+        "date_of_birth": "1990-05-15",
+        "gender": "Male"
     }
-
     ]
 }

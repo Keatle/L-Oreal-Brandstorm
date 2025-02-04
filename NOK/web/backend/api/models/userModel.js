@@ -77,6 +77,7 @@ class UserModel {
     static async create(userData) {
 
         const { first_name, last_name, email, password, phone_number, date_of_birth, gender } = userData;
+        
         const register = `
             INSERT INTO user 
             (first_name, last_name, email, password, phone_number, date_of_birth, gender) 
